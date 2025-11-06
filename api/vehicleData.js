@@ -1,4 +1,15 @@
 export default function handler(req, res) {
+ // Libera CORS para o Angular local
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+
+  // Trata a requisição pré-flight (CORS)
+  if (req.method === 'OPTIONS') {
+    return res.status(200).end();
+  }
+
+
     if (req.method !== 'POST') {
       return res.status(405).json({ message: 'Método não permitido' });
     }
